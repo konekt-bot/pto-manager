@@ -15,8 +15,9 @@ export class IntelligenceCore {
 
   public async askQuestion(prompt: string, model: ModelType = ModelType.FLASH): Promise<string> {
     const apiKey = process.env.API_KEY;
+    
     if (!apiKey || apiKey === 'undefined' || apiKey === '') {
-      return "Error: No Gemini API Key found in environment variables. Please check your deployment settings.";
+      return "Error: No API_KEY environment variable detected. If you are on Vercel, ensure you have added the key in Project Settings.";
     }
 
     try {
@@ -33,13 +34,8 @@ export class IntelligenceCore {
 
       return response.text || "No response received from the model.";
     } catch (error: any) {
-      console.error("IntelligenceCore API Error:", error);
-      
-      if (error.message?.includes("Requested entity was not found")) {
-        return "Error: Requested model was not found. Check your API key and region.";
-      }
-      
-      return `Error: ${error.message || "An unexpected error occurred while communicating with Gemini."}`;
+      console.error("IntelligenceCore Error:", error);
+      return `Error: ${error.message || "Communication failure with GenAI."}`;
     }
   }
 }

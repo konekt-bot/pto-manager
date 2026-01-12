@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { PersistenceManager } from './PersistenceManager';
-import Dashboard from './components/Dashboard';
-import ManagerPortal from './components/ManagerPortal';
-import TeamsToday from './components/TeamsToday';
+import DashboardView from './components/DashboardView';
+import ManagerPortalView from './components/ManagerPortalView';
+import TeamsTodayView from './components/TeamsTodayView';
 import FaqSection from './components/FaqSection';
 import DeploymentSection from './components/DeploymentSection';
 import { User } from './types';
 
 const App: React.FC = () => {
-  // Use root PersistenceManager
   const [user, setUser] = useState<User>(PersistenceManager.getUser());
   const [activeTab, setActiveTab] = useState<'dashboard' | 'manager' | 'today' | 'info'>('dashboard');
 
@@ -30,7 +29,7 @@ const App: React.FC = () => {
             </div>
             <div>
               <span className="font-bold text-lg tracking-tight text-white block leading-none">PTO Pro</span>
-              <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1 block">V1.2 Stable</span>
+              <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1 block">Enterprise Edition</span>
             </div>
           </div>
         </div>
@@ -104,7 +103,7 @@ const App: React.FC = () => {
             <svg className="w-3 h-3 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
             </svg>
-            Switch to {user.role === 'Employee' ? 'Manager' : 'Employee'}
+            Switch Context
           </button>
         </div>
       </aside>
@@ -135,9 +134,9 @@ const App: React.FC = () => {
 
         <div className="flex-grow overflow-y-auto p-10">
           <div className="max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-2 duration-700">
-            {activeTab === 'dashboard' && <Dashboard user={user} />}
-            {activeTab === 'manager' && <ManagerPortal />}
-            {activeTab === 'today' && <TeamsToday />}
+            {activeTab === 'dashboard' && <DashboardView user={user} />}
+            {activeTab === 'manager' && <ManagerPortalView />}
+            {activeTab === 'today' && <TeamsTodayView />}
             {activeTab === 'info' && (
               <div className="space-y-10">
                 <FaqSection />

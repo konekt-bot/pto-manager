@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
-// Corrected casing to match storageService.ts to resolve casing conflict errors
-import { StorageService } from './services/storageService';
+import { PersistenceManager } from './PersistenceManager';
 import Dashboard from './components/Dashboard';
 import ManagerPortal from './components/ManagerPortal';
 import TeamsToday from './components/TeamsToday';
+import FaqSection from './components/FaqSection';
+import DeploymentSection from './components/DeploymentSection';
 import { User } from './types';
 
 const App: React.FC = () => {
-  const [user, setUser] = useState<User>(StorageService.getUser());
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'manager' | 'today'>('dashboard');
+  // Use root PersistenceManager
+  const [user, setUser] = useState<User>(PersistenceManager.getUser());
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'manager' | 'today' | 'info'>('dashboard');
 
   const switchRole = () => {
     const newRole = user.role === 'Employee' ? 'Manager' : 'Employee';
     const newUser = { ...user, role: newRole as any };
     setUser(newUser);
-    StorageService.setUser(newUser);
+    PersistenceManager.setUser(newUser);
   };
 
   return (
-    <div className="min-h-screen flex bg-slate-50 overflow-hidden h-screen">
+    <div className="min-h-screen flex bg-slate-50 overflow-hidden h-screen font-sans">
       {/* Sidebar */}
       <aside className="w-72 bg-slate-900 flex flex-col hidden md:flex shrink-0">
         <div className="p-8 border-b border-slate-800">
@@ -28,7 +30,7 @@ const App: React.FC = () => {
             </div>
             <div>
               <span className="font-bold text-lg tracking-tight text-white block leading-none">PTO Pro</span>
-              <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1 block">Enterprise Edition</span>
+              <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1 block">V1.2 Stable</span>
             </div>
           </div>
         </div>
@@ -67,18 +69,31 @@ const App: React.FC = () => {
             </svg>
             Teams: Who's Off?
           </button>
+          <div className="pt-4 border-t border-slate-800 mt-4">
+             <button 
+              onClick={() => setActiveTab('info')}
+              className={`w-full flex items-center px-4 py-3.5 text-sm font-semibold rounded-xl transition-all ${
+                activeTab === 'info' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              }`}
+            >
+              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Project Info
+            </button>
+          </div>
         </nav>
 
         <div className="p-6 mt-auto border-t border-slate-800">
           <div className="bg-slate-800/40 rounded-2xl p-5 mb-6 border border-slate-700/50">
-            <div className="text-[10px] font-bold text-slate-500 uppercase mb-2 tracking-wider">User Session</div>
+            <div className="text-[10px] font-bold text-slate-500 uppercase mb-2 tracking-wider">Active Workspace</div>
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs font-bold text-slate-300">
                 {user.name.charAt(0)}
               </div>
               <div className="overflow-hidden">
                 <div className="text-sm font-bold text-white truncate">{user.name}</div>
-                <div className="text-[10px] text-indigo-400 font-bold uppercase mt-0.5">{user.role} Access</div>
+                <div className="text-[10px] text-indigo-400 font-bold uppercase mt-0.5">{user.role} Context</div>
               </div>
             </div>
           </div>
@@ -103,16 +118,16 @@ const App: React.FC = () => {
            </div>
            <div className="hidden md:block">
               <h2 className="text-sm font-bold text-slate-400 uppercase tracking-widest">
-                {activeTab === 'dashboard' ? 'Employee Dashboard' : activeTab === 'manager' ? 'Management Review' : 'Team Presence'}
+                {activeTab === 'dashboard' ? 'Personal Portfolio' : activeTab === 'manager' ? 'Organization Management' : activeTab === 'today' ? 'Global Attendance' : 'System Knowledge Base'}
               </h2>
            </div>
            <div className="flex items-center gap-6">
               <div className="h-10 w-[1px] bg-slate-200 hidden md:block"></div>
               <div className="flex flex-col items-end">
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest leading-none mb-1.5">System Status</span>
+                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest leading-none mb-1.5">Root Storage</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] text-slate-600 font-bold">Encrypted Connection</span>
-                  <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] animate-pulse"></div>
+                  <span className="text-[11px] text-slate-600 font-bold">Persistence Manager Active</span>
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
                 </div>
               </div>
            </div>
@@ -123,6 +138,12 @@ const App: React.FC = () => {
             {activeTab === 'dashboard' && <Dashboard user={user} />}
             {activeTab === 'manager' && <ManagerPortal />}
             {activeTab === 'today' && <TeamsToday />}
+            {activeTab === 'info' && (
+              <div className="space-y-10">
+                <FaqSection />
+                <DeploymentSection />
+              </div>
+            )}
           </div>
         </div>
       </main>

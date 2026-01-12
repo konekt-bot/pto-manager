@@ -1,7 +1,6 @@
 export type RequestStatus = 'Pending' | 'Approved' | 'Denied';
 export type RequestType = 'Full Day' | 'Half Day' | 'Medical' | 'Personal';
 
-// Added ModelType enum to define available Gemini models and satisfy geminiService imports
 export enum ModelType {
   FLASH = 'gemini-3-flash-preview',
   PRO = 'gemini-3-pro-preview'
@@ -26,6 +25,8 @@ export interface PTORequest {
   hours: number;
   status: RequestStatus;
   reason: string;
+  managerNote?: string;
+  isFavor?: boolean;
   createdAt: string;
 }
 

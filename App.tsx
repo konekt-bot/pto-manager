@@ -1,5 +1,5 @@
-
 import React, { useState } from 'react';
+// Corrected casing to match storageService.ts to resolve casing conflict errors
 import { StorageService } from './services/storageService';
 import Dashboard from './components/Dashboard';
 import ManagerPortal from './components/ManagerPortal';

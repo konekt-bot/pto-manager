@@ -1,8 +1,7 @@
-
 export type RequestStatus = 'Pending' | 'Approved' | 'Denied';
 export type RequestType = 'Full Day' | 'Half Day' | 'Medical' | 'Personal';
 
-// Define the supported model types for Gemini API following the latest naming conventions
+// Added ModelType enum to define available Gemini models and satisfy geminiService imports
 export enum ModelType {
   FLASH = 'gemini-3-flash-preview',
   PRO = 'gemini-3-pro-preview'

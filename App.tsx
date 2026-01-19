@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { PersistenceManager } from './PersistenceManager';
-// Fix: Use consistent casing for component imports to resolve build conflict
+// Fix: Corrected casing to match the canonical Views.tsx file and resolve TypeScript error
 import { DashboardView, ManagerPortalView, TeamsTodayView } from './components/Views';
 import FaqSection from './components/FaqSection';
 import DeploymentSection from './components/DeploymentSection';

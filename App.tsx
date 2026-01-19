@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PersistenceManager } from './PersistenceManager';
-import DashboardView from './components/DashboardView';
-import ManagerPortalView from './components/ManagerPortalView';
-import TeamsTodayView from './components/TeamsTodayView';
+import { DashboardView, ManagerPortalView, TeamsTodayView } from './components/Views';
 import FaqSection from './components/FaqSection';
 import DeploymentSection from './components/DeploymentSection';
 import { User } from './types';
@@ -14,7 +12,6 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const reqs = PersistenceManager.getRequests();
-    // Simplified check for first-time orientation
     if (reqs.length <= 1) {
       setIsFirstLaunch(true);
     }
@@ -28,7 +25,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex bg-slate-50 overflow-hidden h-screen font-sans">
+    <div className="min-h-screen flex bg-slate-50 overflow-hidden h-screen font-sans text-slate-900">
       {/* Sidebar */}
       <aside className="w-72 bg-white flex flex-col hidden md:flex shrink-0 border-r border-slate-200 shadow-sm z-20">
         <div className="p-8 border-b border-slate-100">
@@ -131,9 +128,9 @@ const App: React.FC = () => {
            <div className="flex items-center gap-6">
               <div className="h-10 w-[1px] bg-slate-200 hidden md:block"></div>
               <div className="flex flex-col items-end">
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest leading-none mb-1.5">Persistence Integrity</span>
+                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest leading-none mb-1.5 text-nowrap">Persistence Integrity</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] text-[#003366] font-black uppercase tracking-tight">Active Florida Cloud</span>
+                  <span className="text-[11px] text-[#003366] font-black uppercase tracking-tight text-nowrap">Active Florida Cloud</span>
                   <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.6)] animate-pulse"></div>
                 </div>
               </div>
@@ -151,8 +148,8 @@ const App: React.FC = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-black italic">Successfully Deployed to FLCC Cloud!</h3>
-                    <p className="text-xs font-bold text-white/80">To populate the system, navigate to the <span className="underline cursor-pointer font-black" onClick={() => setActiveTab('info')}>Project Info</span> tab and click "Seed Test Data".</p>
+                    <h3 className="text-lg font-black italic">Successfully Deployed!</h3>
+                    <p className="text-xs font-bold text-white/80">To populate the system, navigate to <span className="underline cursor-pointer font-black" onClick={() => setActiveTab('info')}>Project Info</span> and click "Seed Test Data".</p>
                   </div>
                 </div>
                 <button onClick={() => setIsFirstLaunch(false)} className="text-white/40 hover:text-white transition-colors">

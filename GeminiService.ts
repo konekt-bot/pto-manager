@@ -1,3 +1,4 @@
+
 import { GoogleGenAI } from "@google/genai";
 import { ModelType } from "./types";
 
@@ -14,11 +15,13 @@ export class GeminiService {
   }
 
   public async askQuestion(prompt: string, model: ModelType = ModelType.FLASH): Promise<string> {
-    if (!process.env.API_KEY || process.env.API_KEY === 'undefined') {
+    // Corrected: Comprehensive check for valid API_KEY environment variable
+    if (!process.env.API_KEY || process.env.API_KEY === 'undefined' || process.env.API_KEY === '' || process.env.API_KEY === 'null') {
       return "Error: No Gemini API Key found. Please add your API_KEY to your environment variables or Vercel settings.";
     }
 
     try {
+      // Corrected: Use direct process.env.API_KEY for initialization as per guidelines
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model,

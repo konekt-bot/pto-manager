@@ -1,3 +1,4 @@
+
 import { GoogleGenAI } from "@google/genai";
 import { ModelType } from "./types";
 
@@ -14,15 +15,14 @@ export class IntelligenceCore {
   }
 
   public async askQuestion(prompt: string, model: ModelType = ModelType.FLASH): Promise<string> {
-    const apiKey = process.env.API_KEY;
-    
-    // Check for common falsy values in environment strings
-    if (!apiKey || apiKey === 'undefined' || apiKey === '' || apiKey === 'null') {
+    // Check for common falsy values in environment strings before calling API
+    if (!process.env.API_KEY || process.env.API_KEY === 'undefined' || process.env.API_KEY === '' || process.env.API_KEY === 'null') {
       return "Error: No API_KEY detected. Please configure the API_KEY environment variable in your Vercel settings.";
     }
 
     try {
-      const ai = new GoogleGenAI({ apiKey });
+      // Corrected: Initializing GoogleGenAI using named parameter with direct process.env.API_KEY reference
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model,
         contents: prompt,

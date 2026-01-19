@@ -17,7 +17,7 @@ export class IntelligenceCore {
     const apiKey = process.env.API_KEY;
     
     if (!apiKey || apiKey === 'undefined' || apiKey === '') {
-      return "Error: No API_KEY environment variable detected. If you are on Vercel, ensure you have added the key in Project Settings.";
+      return "Error: No API_KEY detected. Please add it to Vercel Project Settings > Environment Variables.";
     }
 
     try {

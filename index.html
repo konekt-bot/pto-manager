@@ -3,31 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PTO Manager Pro</title>
+  <title>PTO Manager Pro | FLCC</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#003366', // Primary FLCC Navy
+              blue: '#005DAA', // Secondary FLCC Blue
+              slate: '#64748b',
+            },
+            // Mapping existing indigo classes to brand navy to ensure 100% consistency
+            indigo: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              200: '#bae0fd',
+              300: '#7cc7fb',
+              400: '#38a9f8',
+              500: '#005daa', // brand-blue
+              600: '#003366', // brand-navy
+              700: '#002a54',
+              800: '#002244',
+              900: '#001a33',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
   <style>
     body {
       font-family: 'Inter', sans-serif;
       background-color: #f8fafc;
-      color: #1e293b;
+      color: #0f172a;
     }
     .card-shadow {
-      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     }
-    .sidebar-active {
-      background-color: #f1f5f9;
-      color: #4f46e5;
-      border-right: 4px solid #4f46e5;
+    /* Lock brand specific styles */
+    .brand-gradient {
+      background: linear-gradient(135deg, #003366 0%, #005daa 100%);
     }
   </style>
 <script type="importmap">
 {
   "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
+    "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "@google/genai": "https://esm.sh/@google/genai@^1.35.0"
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3"
   }
 }
 </script>
@@ -35,6 +65,6 @@
 </head>
 <body class="antialiased">
   <div id="root"></div>
-<script type="module" src="/index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
 </body>
 </html>

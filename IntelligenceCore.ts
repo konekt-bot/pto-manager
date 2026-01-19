@@ -16,8 +16,9 @@ export class IntelligenceCore {
   public async askQuestion(prompt: string, model: ModelType = ModelType.FLASH): Promise<string> {
     const apiKey = process.env.API_KEY;
     
-    if (!apiKey || apiKey === 'undefined' || apiKey === '') {
-      return "Error: No API_KEY detected. Please add it to Vercel Project Settings > Environment Variables.";
+    // Check for common falsy values in environment strings
+    if (!apiKey || apiKey === 'undefined' || apiKey === '' || apiKey === 'null') {
+      return "Error: No API_KEY detected. Please configure the API_KEY environment variable in your Vercel settings.";
     }
 
     try {
@@ -27,15 +28,13 @@ export class IntelligenceCore {
         contents: prompt,
         config: {
           temperature: 0.7,
-          topP: 0.95,
-          topK: 64,
         }
       });
 
-      return response.text || "No response received from the model.";
+      return response.text || "No AI output generated.";
     } catch (error: any) {
       console.error("IntelligenceCore Error:", error);
-      return `Error: ${error.message || "Communication failure with GenAI."}`;
+      return `AI Error: ${error.message || "Communication failure."}`;
     }
   }
 }

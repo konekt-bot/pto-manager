@@ -12,19 +12,17 @@
         extend: {
           colors: {
             brand: {
-              navy: '#003366', // Primary FLCC Navy
-              blue: '#005DAA', // Secondary FLCC Blue
-              slate: '#64748b',
+              navy: '#003366', // FLCC Primary Navy
+              blue: '#005DAA', // FLCC Accent Blue
             },
-            // Mapping existing indigo classes to brand navy to ensure 100% consistency
             indigo: {
               50: '#f0f7ff',
               100: '#e0effe',
               200: '#bae0fd',
               300: '#7cc7fb',
-              400: '#38a9f8',
-              500: '#005daa', // brand-blue
-              600: '#003366', // brand-navy
+              400: '#005DAA',
+              500: '#005DAA',
+              600: '#003366',
               700: '#002a54',
               800: '#002244',
               900: '#001a33',
@@ -46,18 +44,20 @@
     .card-shadow {
       box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     }
-    /* Lock brand specific styles */
     .brand-gradient {
       background: linear-gradient(135deg, #003366 0%, #005daa 100%);
+    }
+    .nav-transition {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
   </style>
 <script type="importmap">
 {
   "imports": {
-    "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
+    "react": "https://esm.sh/react@^19.2.3",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3"
+    "@google/genai": "https://esm.sh/@google/genai@^1.37.0"
   }
 }
 </script>
@@ -65,6 +65,7 @@
 </head>
 <body class="antialiased">
   <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
+  <script type="module" src="./index.tsx"></script>
+<script type="module" src="/index.tsx"></script>
 </body>
 </html>

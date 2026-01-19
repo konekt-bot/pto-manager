@@ -1,8 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { PersistenceManager } from './PersistenceManager';
-// Fix: Corrected casing to match the canonical Views.tsx file and resolve TypeScript error
-import { DashboardView, ManagerPortalView, TeamsTodayView } from './components/Views';
+import { DashboardView, ManagerPortalView, TeamsTodayView } from './components/ApplicationViews';
 import FaqSection from './components/FaqSection';
 import DeploymentSection from './components/DeploymentSection';
 import { User } from './types';
@@ -74,7 +72,7 @@ const App: React.FC = () => {
             <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            Teams: Who's Off?
+            Teams: Who&apos;s Off?
           </button>
           <div className="pt-4 border-t border-slate-100 mt-4">
              <button 
@@ -151,11 +149,13 @@ const App: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-lg font-black italic">Successfully Deployed!</h3>
-                    <p className="text-xs font-bold text-white/80">To populate the system, navigate to <span className="underline cursor-pointer font-black" onClick={() => setActiveTab('info')}>Project Info</span> and click "Seed Test Data".</p>
+                    <p className="text-xs font-bold text-white/80">To populate the system, navigate to <span className="underline cursor-pointer font-black" onClick={() => setActiveTab('info')}>Project Info</span> and click &quot;Seed Test Data&quot;.</p>
                   </div>
                 </div>
                 <button onClick={() => setIsFirstLaunch(false)} className="text-white/40 hover:text-white transition-colors">
-                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12"/></svg>
+                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12"/>
+                   </svg>
                 </button>
               </div>
             )}

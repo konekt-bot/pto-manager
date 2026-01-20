@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { PersistenceManager } from './PersistenceManager';
-import { DashboardView, ManagerPortalView, TeamsTodayView } from './components/ApplicationViews';
-import FaqSection from './components/FaqSection';
-import DeploymentSection from './components/DeploymentSection';
+import { DashboardView, ManagerPortalView, TeamsTodayView } from './Components/ApplicationViews';
+import FaqSection from './Components/FaqSection';
+import DeploymentSection from './Components/DeploymentSection';
 import { User } from './types';
 
 const App: React.FC = () => {

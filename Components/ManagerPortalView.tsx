@@ -1,2 +1,2 @@
-// Consolidated into components/Views.tsx
+// Consolidated into Components/Views.tsx
 export {};
